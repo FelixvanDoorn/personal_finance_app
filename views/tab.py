@@ -1,8 +1,13 @@
 from controller import save_data
+from .data_entry import DataEntry
 from tkinter import ttk
 
 
 class Tab:
+    """
+    Tab forms the foundation of the GUI.
+    """
+
     def __init__(self, tab_controller, tab_name) -> None:
         self.tab_name = tab_name
         self.tab_frame = ttk.Frame(tab_controller)
@@ -16,22 +21,24 @@ class Tab:
 
 
 class BudgetTab(Tab):
+    """
+    This will display the parts of the application used for budgetting
+    At the moment, this just displays data entry.
+    """
+
     def __init__(self, tab_controller) -> None:
         super().__init__(tab_controller, "Budget")
         tab_frame = self.get_tab_frame()
-        self.expense_name_label = ttk.Label(tab_frame, text="Expense Name")
-        self.expense_name_label.pack()
-        self.expense_name_entry = ttk.Entry(tab_frame)
-        self.expense_name_entry.pack()
-        self.expense_value_label = ttk.Label(tab_frame, text="Expense Value")
-        self.expense_value_label.pack()
-        self.expense_value_entry = ttk.Entry(tab_frame)
-        self.expense_value_entry.pack()
+        self.data_entry = DataEntry(tab_frame)
         self.save_button = ttk.Button(tab_frame, text="Save", command=save_data)
         self.save_button.pack()
 
 
 class AssetTab(Tab):
+    """
+    This displays part of the app that is used for managing asset portfolio.
+    """
+
     def __init__(self, tab_controller) -> None:
         super().__init__(tab_controller, "Assets")
         tab_frame = self.get_tab_frame()
