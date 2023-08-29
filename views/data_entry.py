@@ -24,3 +24,7 @@ class DataEntry:
         self.date_label.pack()
         self.date_entry = ttk.Entry(tab_frame)
         self.date_entry.pack()
+        self.type_label = ttk.Label(tab_frame, text="Entry Type")
+        self.type_label.pack()
+        self.type_entry = ttk.Entry(tab_frame)
+        self.type_entry.pack()
