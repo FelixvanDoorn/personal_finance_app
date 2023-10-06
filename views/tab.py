@@ -1,4 +1,3 @@
-from controller import save_data
 from .data_entry import DataEntry
 from tkinter import ttk
 
@@ -30,8 +29,7 @@ class BudgetTab(Tab):
         super().__init__(tab_controller, "Budget")
         tab_frame = self.get_tab_frame()
         self.data_entry = DataEntry(tab_frame)
-        self.save_button = ttk.Button(tab_frame, text="Save", command=save_data)
-        self.save_button.pack()
+
 
 
 class AssetTab(Tab):
