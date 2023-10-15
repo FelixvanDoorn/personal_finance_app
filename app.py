@@ -1,5 +1,5 @@
-from views.tab import AssetTab
-from views.tab import BudgetTab
+from personal_finance_app.views.tab import AssetTab
+from personal_finance_app.views.tab import BudgetTab
 from tkinter import ttk
 
 import tkinter as tk

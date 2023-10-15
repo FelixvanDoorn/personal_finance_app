@@ -30,8 +30,6 @@ class BudgetTab(Tab):
         tab_frame = self.get_tab_frame()
         self.data_entry = DataEntry(tab_frame)
 
-
-
 class AssetTab(Tab):
     """
     This displays part of the app that is used for managing asset portfolio.

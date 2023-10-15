@@ -1,4 +1,4 @@
-from controllers.data_entry_controller import DataEntryController
+from personal_finance_app.controllers.data_entry_controller import DataEntryController
 from tkinter import ttk
 
 import tkinter as tk
@@ -35,12 +35,13 @@ class DataEntry:
         self.type_label.pack()
         self.type_entry = ttk.Entry(tab_frame, textvariable=self.type_var)
         self.type_entry.pack()
-
-        self.data_entry_controller = DataEntryController()
+        
+        self.data_entry_controller = DataEntryController(
+            self.name_entry, self.value_entry, self.date_entry, self.type_entry
+        )
 
         self.save_button = ttk.Button(
             tab_frame, text="Save", command=self.data_entry_controller.save_data
         )
 
         self.save_button.pack()
-
