@@ -1,10 +1,12 @@
-from personal_finance_app.controllers.data_entry_controller import DataEntryController
+from personal_finance_app.controllers.spending_data_entry_controller import (
+    SpendingDataEntryController,
+)
 from tkinter import ttk
 
 import tkinter as tk
 
 
-class DataEntry:
+class SpendingDataEntryView:
     """
     This is a container for the visual components used for entering data.
     Core components of each entry are:
@@ -35,13 +37,30 @@ class DataEntry:
         self.type_label.pack()
         self.type_entry = ttk.Entry(tab_frame, textvariable=self.type_var)
         self.type_entry.pack()
-        
-        self.data_entry_controller = DataEntryController(
-            self.name_entry, self.value_entry, self.date_entry, self.type_entry
-        )
-
-        self.save_button = ttk.Button(
-            tab_frame, text="Save", command=self.data_entry_controller.save_data
-        )
-
+        self.save_button = ttk.Button(tab_frame, text="Save")
         self.save_button.pack()
+
+    def get_button(self):
+        return self.save_button
+
+    def get_name_entry(self):
+        return self.name_entry
+
+    def get_value_entry(self):
+        return self.value_entry
+
+    def get_date_entry(self):
+        return self.date_entry
+
+    def get_type_entry(self):
+        return self.type_entry
+
+    def get_data_entry_dict(self):
+        self.entry_dict = {
+            "name": self.get_name_entry(),
+            "value": self.get_value_entry(),
+            "date": self.get_date_entry(),
+            "type": self.get_type_entry(),
+        }
+
+        return self.entry_dict

@@ -1,4 +1,4 @@
-from .data_entry import DataEntry
+from .spending_data_entry import SpendingDataEntryView
 from tkinter import ttk
 
 
@@ -28,7 +28,11 @@ class BudgetTab(Tab):
     def __init__(self, tab_controller) -> None:
         super().__init__(tab_controller, "Budget")
         tab_frame = self.get_tab_frame()
-        self.data_entry = DataEntry(tab_frame)
+        self.data_entry = SpendingDataEntryView(tab_frame)
+
+    def get_data_entry(self):
+        return self.data_entry
+
 
 class AssetTab(Tab):
     """
