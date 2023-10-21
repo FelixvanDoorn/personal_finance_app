@@ -11,7 +11,6 @@ class SpendingDataEntryController:
     def save_data(self):
         print("Save Data")
         data_entry_dict = self.data_entry_view.get_data_entry_dict()
-        name_entry = data_entry_dict.get("name", "")
-        name_entered = name_entry.get()
-        
-        print(name_entered)
+        key_list = data_entry_dict.keys()
+        saved_data = {key: data_entry_dict[key].get() for key in key_list}
+        print(saved_data)
