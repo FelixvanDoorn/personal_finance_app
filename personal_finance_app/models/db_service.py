@@ -1,3 +1,4 @@
+import pandas as pd
 import sqlite3
 
 
@@ -8,3 +9,7 @@ class DatabaseService:
 
     def run_query(self, query):
         self.connection.execute(query)
+
+    def load_query_to_dataframe(self, query):
+        execution = self.run_query(query)
+        return pd.DataFrame(execution.fetchall())
