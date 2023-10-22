@@ -1,6 +1,7 @@
 class SpendingDataEntryController:
     """
-    This is a Controller for the input form
+    This is a Controller for the input form.
+    It takes data from the form and sends it to the model
     """
 
     def __init__(self, data_entry_view):
