@@ -28,6 +28,10 @@ if __name__ == "__main__":
     tab_control.pack(expand=1, fill="both")
 
     spend_data_entry_controller = SpendingDataEntryController(
-        budget_tab.get_data_entry()
+        budget_tab.get_data_entry(),
+        spend_data_model
     )
+
+
+
     root.mainloop()
