@@ -18,7 +18,7 @@ class SpendingDataEntryView:
 
     def __init__(self, tab_frame) -> None:
         self.name_var = tk.StringVar()
-        self.value_var = tk.StringVar()
+        self.value_var = tk.DoubleVar()
         self.date_var = tk.StringVar()
         self.type_var = tk.StringVar()
         self.name_label = ttk.Label(tab_frame, text="Entry Name")
