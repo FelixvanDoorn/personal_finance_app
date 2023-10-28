@@ -20,18 +20,19 @@ class SpendDataModel:
         transaction_type_value = data_to_save.get("type", "")
 
         self.database_service.run_query(
-            f"""
+            """
             INSERT INTO spending_data(
                 transaction_description,
                 transaction_amount,
                 transaction_date,
                 transaction_category
             )
-            VALUES (
-                '{transaction_description_value}',
-                {transaction_amount_value},
-                {transaction_date_value},
-                '{transaction_type_value}'
-            );
-            """
+            VALUES (?, ?, ?, ?);
+            """,
+            insert_vals=(
+                transaction_description_value,
+                transaction_amount_value,
+                transaction_date_value,
+                transaction_type_value,
+            ),
         )

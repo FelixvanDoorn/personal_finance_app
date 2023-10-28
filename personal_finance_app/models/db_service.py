@@ -9,12 +9,16 @@ class DatabaseService:
     """
 
     def __init__(self, database_config):
-        database_file_path = database_config.get("file_path")
-        self.connection = sqlite3.connect(database_file_path)
+        self.database_file_path = database_config.get("file_path")
 
-    def run_query(self, query) -> None:
-        self.connection.execute(query)
+    def run_query(self, query, insert_vals=()) -> None:
+        self.connection = sqlite3.connect(self.database_file_path)
+        self.connection.execute(query, insert_vals)
+        self.connection.commit()
+        self.connection.close()
 
     def load_query_to_dataframe(self, query) -> pd.DataFrame:
-        execution = self.run_query(query)
+        self.connection = sqlite3.connect(self.database_file_path)
+        execution = self.connection.execute(query)
+        self.connection.close()
         return pd.DataFrame(execution.fetchall())
