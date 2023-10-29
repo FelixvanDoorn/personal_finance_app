@@ -1,4 +1,4 @@
-from .spending_data_entry import SpendingDataEntryView
+from .budget_data_entry import BudgetDataEntryView
 from tkinter import ttk
 
 
@@ -25,12 +25,12 @@ class BudgetTab(Tab):
     At the moment, this just displays data entry.
     """
 
-    def __init__(self, tab_controller) -> None:
+    def __init__(self, tab_controller, dropdown_options) -> None:
         super().__init__(tab_controller, "Budget")
         tab_frame = self.get_tab_frame()
-        self.data_entry = SpendingDataEntryView(tab_frame)
+        self.data_entry = BudgetDataEntryView(tab_frame, dropdown_options)
 
-    def get_data_entry(self):
+    def get_data_entry(self) -> BudgetDataEntryView:
         return self.data_entry
 
 
@@ -43,5 +43,9 @@ class AssetTab(Tab):
         super().__init__(tab_controller, "Assets")
         tab_frame = self.get_tab_frame()
         tab_name = self.get_tab_name()
-        self.label = ttk.Label(tab_frame, text="Placeholder for %s section" % tab_name)
+
+        self.label = ttk.Label(
+            tab_frame,
+            text="Placeholder for %s section" % tab_name
+        )
         self.label.pack(padx=10, pady=10)

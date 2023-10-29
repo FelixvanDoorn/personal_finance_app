@@ -8,7 +8,7 @@ class DatabaseService:
     Any DB logic that is shared across different models will be configured here
     """
 
-    def __init__(self, database_config):
+    def __init__(self, database_config) -> None:
         self.database_file_path = database_config.get("file_path")
 
     def run_query(self, query, insert_vals=()) -> None:

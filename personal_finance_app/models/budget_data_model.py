@@ -1,9 +1,14 @@
-class SpendDataModel:
-    def __init__(self, database_service):
+class BudgetDataModel:
+    """
+    This models Budget Data in the app.
+    Current reponsibility is to insert budget data into the database
+    """
+
+    def __init__(self, database_service) -> None:
         self.database_service = database_service
         self.database_service.run_query(
             """
-            CREATE TABLE IF NOT EXISTS spending_data(
+            CREATE TABLE IF NOT EXISTS budget_data(
                 transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 transaction_description TEXT NOT NULL,
                 transaction_amount DOUBLE NOT NULL,
@@ -13,7 +18,7 @@ class SpendDataModel:
             """
         )
 
-    def create_new_transaction(self, data_to_save):
+    def create_new_transaction(self, data_to_save) -> None:
         transaction_description_value = data_to_save.get("name", "")
         transaction_amount_value = data_to_save.get("value", "")
         transaction_date_value = data_to_save.get("date", "")
@@ -21,7 +26,7 @@ class SpendDataModel:
 
         self.database_service.run_query(
             """
-            INSERT INTO spending_data(
+            INSERT INTO budget_data(
                 transaction_description,
                 transaction_amount,
                 transaction_date,
