@@ -18,29 +18,35 @@ class BudgetDataEntryView:
         self.value_var = tk.DoubleVar()
         self.date_var = tk.StringVar()
         self.type_var = tk.StringVar()
+        self.budget_entry_frame = ttk.Frame(tab_frame, borderwidth=2, relief="solid")
         self.type_options = dropdown_options
-        self.name_label = ttk.Label(tab_frame, text="Entry Name")
+        self.name_label = ttk.Label(self.budget_entry_frame, text="Entry Name")
         self.name_label.pack()
-        self.name_entry = ttk.Entry(tab_frame, textvariable=self.name_var)
+        self.name_entry = ttk.Entry(self.budget_entry_frame, textvariable=self.name_var)
         self.name_entry.pack()
-        self.value_label = ttk.Label(tab_frame, text="Entry Value")
+        self.value_label = ttk.Label(self.budget_entry_frame, text="Entry Value")
         self.value_label.pack()
-        self.value_entry = ttk.Entry(tab_frame, textvariable=self.value_var)
+
+        self.value_entry = ttk.Entry(
+            self.budget_entry_frame, textvariable=self.value_var
+        )
         self.value_entry.pack()
-        self.date_label = ttk.Label(tab_frame, text="Entry Date")
+        self.date_label = ttk.Label(self.budget_entry_frame, text="Entry Date")
         self.date_label.pack()
-        self.date_entry = ttk.Entry(tab_frame, textvariable=self.date_var)
+        self.date_entry = ttk.Entry(self.budget_entry_frame, textvariable=self.date_var)
         self.date_entry.pack()
-        self.type_label = ttk.Label(tab_frame, text="Entry Type")
+        self.type_label = ttk.Label(self.budget_entry_frame, text="Entry Type")
         self.type_label.pack()
 
         self.type_entry = ttk.Combobox(
-            tab_frame, values=self.type_options, textvariable=self.type_var
+            self.budget_entry_frame,
+            values=self.type_options,
+            textvariable=self.type_var,
         )
 
         self.type_entry.set(self.type_options[0])
         self.type_entry.pack()
-        self.save_button = ttk.Button(tab_frame, text="Save")
+        self.save_button = ttk.Button(self.budget_entry_frame, text="Save")
         self.save_button.pack()
 
     def get_button(self) -> ttk.Button:
@@ -67,3 +73,6 @@ class BudgetDataEntryView:
         }
 
         return self.entry_dict
+
+    def get_budget_entry_frame(self) -> ttk.Frame:
+        return self.budget_entry_frame

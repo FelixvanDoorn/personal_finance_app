@@ -1,4 +1,5 @@
 from .budget_data_entry import BudgetDataEntryView
+from .budget_status_view import BudgetStatusView
 from tkinter import ttk
 
 
@@ -29,6 +30,11 @@ class BudgetTab(Tab):
         super().__init__(tab_controller, "Budget")
         tab_frame = self.get_tab_frame()
         self.data_entry = BudgetDataEntryView(tab_frame, dropdown_options)
+        self.budget_status = BudgetStatusView(tab_frame)
+        budget_entry_frame = self.data_entry.get_budget_entry_frame()
+        budget_status_frame = self.budget_status.get_budget_status_frame()
+        budget_entry_frame.grid(row=0, column=0, padx=10, pady=10)
+        budget_status_frame.grid(row=0, column=1, padx=10, pady=10)
 
     def get_data_entry(self) -> BudgetDataEntryView:
         return self.data_entry

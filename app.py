@@ -22,6 +22,7 @@ if __name__ == "__main__":
     database_service = DatabaseService(database_config)
     budget_data_model = BudgetDataModel(database_service)
     root = tk.Tk()
+    root.geometry("800x800")
     root.title("Personal Finance Toolkit")
     tab_control = ttk.Notebook(root)
     budget_tab = BudgetTab(tab_control, ui_dropdown_options)
