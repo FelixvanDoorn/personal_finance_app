@@ -19,6 +19,7 @@ class BudgetDataModel:
         )
 
     def create_new_transaction(self, data_to_save) -> None:
+        """Inserts a new transaction entry."""
         transaction_description_value = data_to_save.get("name", "")
         transaction_amount_value = data_to_save.get("value", "")
         transaction_date_value = data_to_save.get("date", "")
@@ -41,3 +42,29 @@ class BudgetDataModel:
                 transaction_type_value,
             ),
         )
+
+    def query_budget_status(self) -> dict:
+        """
+        Query latest status of budget
+        """
+        query_result = self.database_service.load_query(
+            """
+            SELECT
+              SUM(
+                CASE WHEN transaction_category = 'Income'
+                THEN transaction_amount
+                ELSE 0
+                END
+              ) AS income,
+              SUM(
+                CASE WHEN transaction_category <> 'Income'
+                THEN transaction_amount
+                ELSE 0
+                END
+              ) AS spend
+            FROM
+              budget_data
+            """
+        )
+
+        return query_result

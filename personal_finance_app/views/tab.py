@@ -39,6 +39,9 @@ class BudgetTab(Tab):
     def get_data_entry(self) -> BudgetDataEntryView:
         return self.data_entry
 
+    def get_status_view(self) -> BudgetStatusView:
+        return self.budget_status
+
 
 class AssetTab(Tab):
     """
@@ -50,8 +53,5 @@ class AssetTab(Tab):
         tab_frame = self.get_tab_frame()
         tab_name = self.get_tab_name()
 
-        self.label = ttk.Label(
-            tab_frame,
-            text="Placeholder for %s section" % tab_name
-        )
+        self.label = ttk.Label(tab_frame, text="Placeholder for %s section" % tab_name)
         self.label.pack(padx=10, pady=10)

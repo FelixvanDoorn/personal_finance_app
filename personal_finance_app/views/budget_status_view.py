@@ -15,7 +15,15 @@ class BudgetStatusView:
         self.needs_budget_value_string = tk.StringVar()
         self.wants_budget_value_string = tk.StringVar()
         self.investments_budget_value_string = tk.StringVar()
-        total_budget_label = tk.Label(self.budget_status_frame, textvariable=self.total_budget_value_string)
+
+        total_budget_label = tk.Label(
+            self.budget_status_frame, textvariable=self.total_budget_value_string
+        )
+
+        total_budget_label.pack()
 
     def get_budget_status_frame(self) -> ttk.Frame:
         return self.budget_status_frame
+
+    def set_total_budget_value_string(self, budget_value_to_set) -> None:
+        self.total_budget_value_string.set(budget_value_to_set)

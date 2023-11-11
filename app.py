@@ -1,6 +1,9 @@
 from personal_finance_app.controllers.budget_data_entry_controller import (
     BudgetDataEntryController,
 )
+from personal_finance_app.controllers.budget_status_controller import (
+    BudgetStatusController,
+)
 from personal_finance_app.models.db_service import DatabaseService
 from personal_finance_app.models.budget_data_model import BudgetDataModel
 from personal_finance_app.views.tab import AssetTab
@@ -29,8 +32,14 @@ if __name__ == "__main__":
     asset_tab = AssetTab(tab_control)
     tab_control.pack(expand=1, fill="both")
 
-    spend_data_entry_controller = BudgetDataEntryController(
+    budget_data_entry_controller = BudgetDataEntryController(
         budget_tab.get_data_entry(), budget_data_model
     )
+
+    status_view = budget_tab.get_status_view()
+    budget_status_controller = BudgetStatusController(status_view, budget_data_model)
+
+    budget_query_result = budget_status_controller.load_data()
+    budget_status_controller.update_data(budget_query_result)
 
     root.mainloop()
