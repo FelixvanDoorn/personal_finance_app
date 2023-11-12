@@ -7,3 +7,9 @@ user_interface:
     - "Spending: Wants"
     - "Spending: Investments"
     - "Income"
+
+application_settings:
+  budget_breakdown:
+    Needs: 0.50
+    Wants: 0.30
+    Investments: 0.20

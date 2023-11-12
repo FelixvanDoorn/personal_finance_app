@@ -20,6 +20,7 @@ with open(config_file_path, "r") as file:
 
 database_config = config["database"]
 ui_dropdown_options = config["user_interface"]["drop_down_options"]
+budget_breakdown = config["application_settings"]["budget_breakdown"]
 
 if __name__ == "__main__":
     database_service = DatabaseService(database_config)
@@ -37,7 +38,12 @@ if __name__ == "__main__":
     )
 
     status_view = budget_tab.get_status_view()
-    budget_status_controller = BudgetStatusController(status_view, budget_data_model)
+
+    budget_status_controller = BudgetStatusController(
+        status_view,
+        budget_data_model,
+        budget_breakdown
+    )
 
     budget_query_result = budget_status_controller.load_data()
     budget_status_controller.update_data(budget_query_result)

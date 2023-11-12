@@ -18,13 +18,23 @@ class BudgetDataEntryView:
         self.value_var = tk.DoubleVar()
         self.date_var = tk.StringVar()
         self.type_var = tk.StringVar()
-        self.budget_entry_frame = ttk.Frame(tab_frame, borderwidth=2, relief="solid")
+        self.budget_entry_frame = ttk.Frame(
+            tab_frame,
+            borderwidth=2,
+            relief="solid"
+        )
         self.type_options = dropdown_options
         self.name_label = ttk.Label(self.budget_entry_frame, text="Entry Name")
         self.name_label.pack()
-        self.name_entry = ttk.Entry(self.budget_entry_frame, textvariable=self.name_var)
+        self.name_entry = ttk.Entry(
+            self.budget_entry_frame,
+            textvariable=self.name_var
+        )
         self.name_entry.pack()
-        self.value_label = ttk.Label(self.budget_entry_frame, text="Entry Value")
+        self.value_label = ttk.Label(
+            self.budget_entry_frame,
+            text="Entry Value"
+        )
         self.value_label.pack()
 
         self.value_entry = ttk.Entry(
@@ -33,7 +43,11 @@ class BudgetDataEntryView:
         self.value_entry.pack()
         self.date_label = ttk.Label(self.budget_entry_frame, text="Entry Date")
         self.date_label.pack()
-        self.date_entry = ttk.Entry(self.budget_entry_frame, textvariable=self.date_var)
+
+        self.date_entry = ttk.Entry(
+            self.budget_entry_frame,
+            textvariable=self.date_var
+        )
         self.date_entry.pack()
         self.type_label = ttk.Label(self.budget_entry_frame, text="Entry Type")
         self.type_label.pack()

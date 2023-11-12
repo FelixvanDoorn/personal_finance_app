@@ -45,7 +45,10 @@ class BudgetDataModel:
 
     def query_budget_status(self) -> dict:
         """
-        Query latest status of budget
+        Query latest status of budget.
+        Retrieves total spend and income, and spend breakdown by category.
+        Income breakdown by category comes from a multiplier over total income.
+        This does not require any further DB input.
         """
         query_result = self.database_service.load_query(
             """
@@ -61,7 +64,25 @@ class BudgetDataModel:
                 THEN transaction_amount
                 ELSE 0
                 END
-              ) AS spend
+              ) AS spend,
+              SUM(
+                CASE WHEN transaction_category = 'Spending: Needs'
+                THEN transaction_amount
+                ELSE 0
+                END
+              ) AS spend_needs,
+              SUM(
+                CASE WHEN transaction_category = 'Spending: Wants'
+                THEN transaction_amount
+                ELSE 0
+                END
+              ) AS spend_wants,
+              SUM(
+                CASE WHEN transaction_category = 'Spending: Investments'
+                THEN transaction_amount
+                ELSE 0
+                END
+              ) AS spend_investments
             FROM
               budget_data
             """

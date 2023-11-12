@@ -53,5 +53,8 @@ class AssetTab(Tab):
         tab_frame = self.get_tab_frame()
         tab_name = self.get_tab_name()
 
-        self.label = ttk.Label(tab_frame, text="Placeholder for %s section" % tab_name)
+        self.label = ttk.Label(
+            tab_frame,
+            text=f"Placeholder for {tab_name} section"
+        )
         self.label.pack(padx=10, pady=10)
