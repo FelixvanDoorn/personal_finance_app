@@ -1,5 +1,5 @@
 database:
-  file_path: data/personal_finance_app.db
+  file_path: data/db/personal_finance_app.db
 
 user_interface:
   drop_down_options:
