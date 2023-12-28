@@ -13,6 +13,7 @@ def add_transaction_categories(budget_category_frame: pd.DataFrame) -> pd.DataFr
     """
     category_name = budget_category_frame.iloc[0, 0]
     category_name = category_name.replace("Expenses", "Spending:")
+    category_name = "Investments" if 'Investment' in category_name else category_name 
     result_frame = budget_category_frame.copy()
     result_frame.columns = ["transaction_description", "transaction_amount"]
     result_frame["transaction_category"] = category_name
@@ -21,8 +22,13 @@ def add_transaction_categories(budget_category_frame: pd.DataFrame) -> pd.DataFr
 
 
 def parse_budgetting_spread_sheet(budget_frame: pd.DataFrame) -> pd.DataFrame:
+    """
+    Reads sheets for each month.
+    For each individual sheet, parses columns values and categorizes them. 
+    Also removes duplicate entries or subtotals.
+    """
     transactions_df = budget_frame.iloc[8:].reset_index()
-
+    
     col_pairs = [
         ("Post", "Total Income"),
         ("Investments", "Unnamed: 5"),
@@ -35,11 +41,12 @@ def parse_budgetting_spread_sheet(budget_frame: pd.DataFrame) -> pd.DataFrame:
     frames_with_transaction_categories = [
         add_transaction_categories(frame) for frame in frame_list
     ]
-    total_frame = pd.concat(frames_with_transaction_categories).dropna()
-    total_frame = total_frame.reset_index().drop(columns=["index"])
 
-    return total_frame
+    unfiltered_total_frame_with_duplicates = pd.concat(frames_with_transaction_categories).dropna()
+    unfiltered_total_frame_deduped = unfiltered_total_frame_with_duplicates.reset_index().drop(columns=["index"])
+    filtered_total_frame_deduped = unfiltered_total_frame_deduped.query("transaction_description != 'Totaal'")
 
+    return filtered_total_frame_deduped
 
 def find_first_numeric_char_position(datestr: str) -> int:
     str_match = re.search(r'\d', datestr)
