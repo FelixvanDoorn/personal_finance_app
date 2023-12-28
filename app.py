@@ -32,11 +32,6 @@ if __name__ == "__main__":
     budget_tab = BudgetTab(tab_control, ui_dropdown_options)
     asset_tab = AssetTab(tab_control)
     tab_control.pack(expand=1, fill="both")
-
-    budget_data_entry_controller = BudgetDataEntryController(
-        budget_tab.get_data_entry(), budget_data_model
-    )
-
     status_view = budget_tab.get_status_view()
 
     budget_status_controller = BudgetStatusController(
@@ -45,7 +40,12 @@ if __name__ == "__main__":
         budget_breakdown
     )
 
+    budget_data_entry_controller = BudgetDataEntryController(
+        budget_tab.get_data_entry(),
+        budget_data_model,
+        budget_status_controller
+    )
+
     budget_query_result = budget_status_controller.load_data()
     budget_status_controller.update_data(budget_query_result)
-
     root.mainloop()
