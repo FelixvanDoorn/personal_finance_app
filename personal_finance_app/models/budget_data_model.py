@@ -50,7 +50,7 @@ class BudgetDataModel:
         Income breakdown by category comes from a multiplier over total income.
         This does not require any further DB input.
         """
-        query_result = self.database_service.load_query(
+        query_result = self.database_service.load_query_fetch_one_to_dict(
             """
             SELECT
               SUM(
@@ -78,7 +78,7 @@ class BudgetDataModel:
                 END
               ) AS spend_wants,
               SUM(
-                CASE WHEN transaction_category = 'Spending: Investments'
+                CASE WHEN transaction_category LIKE '%Investment%'
                 THEN transaction_amount
                 ELSE 0
                 END
@@ -89,3 +89,20 @@ class BudgetDataModel:
         )
 
         return query_result
+    
+    def import_budget_df(self, df) -> None:
+        required_cols = [
+            'transaction_description',
+            'transaction_amount',
+            'transaction_date',
+            'transaction_category'
+            ]   
+
+        try:
+            df = df[required_cols]
+        except KeyError:
+            print("Column not in dataframe")
+        
+        self.database_service.open_connection()
+        db_connection = self.database_service.get_connection()
+        df.to_sql(name='budget_data', con=db_connection, if_exists='replace', index=False)
